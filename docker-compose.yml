@@ -1,0 +1,56 @@
+version: '3.3'
+
+services:
+#  nginx:
+#    depends_on:
+#      - api
+#      - client
+#    restart: always
+#    build:
+#      dockerfile: Dockerfile
+#      context: ./nginx
+#    ports:
+#      - "3050:80"
+
+#  client:
+#    stdin_open: true
+#    environment:
+#      - CHOKIDAR_USEPOLLING=true
+#    build:
+#      dockerfile: Dockerfile
+#      context: ./client
+#    volumes:
+#      - /app/node_modules
+#      - ./client:/app
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: "./server"
+    depends_on:
+      - mydb
+    expose:
+      - 3232
+    ports:
+      - 3232:3232
+    volumes:
+      - ./server:/app
+    environment:
+      - DATABASE_URL=postgresql://react_to_do:react_to_do@mydb:5432/postgres_dev
+      - SECRET_KEY=08d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7
+    command: tail -f /dev/null
+
+  mydb:
+    image: postgres:13
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=react_to_do
+      - POSTGRES_PASSWORD=react_to_do
+      - POSTGRES_DB=postgres_dev
+    volumes:
+      - ./services/backend/postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:
+    driver: local
