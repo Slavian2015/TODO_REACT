@@ -6,7 +6,7 @@
 
 1) Clone code from the repository to the local machine
 
-```$ git clone git@github.com: path_on_locahost```
+```$ git clone git@github.com:Slavian2015/TODO_REACT.git path_on_locahost```
 
 2) CD into the project folder
 3) Inside the main project directory run
