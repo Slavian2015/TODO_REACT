@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {Button, Container, Row, Col} from 'react-bootstrap'
 
+
 class Home extends Component {
     constructor(props) {
         super(props)
@@ -17,7 +18,6 @@ class Home extends Component {
         this.setState({
             [nam]: val
         })
-        console.log(this.state.setTaskTitle)
     }
 
     componentDidMount() {
@@ -36,17 +36,16 @@ class Home extends Component {
                     fetchData: this.state.fetchData.concat([response.data]),
                     setTaskTitle: ''
                 });
-
             })
     }
 
     delete = (id) => {
         axios.delete(`http://0.0.0.0:3232/todos/${id}`)
-
-        this.setState({fetchData: this.state.fetchData.filter(function(task) {
-                    return task.id !== id
-                })});
-        console.log('DELETED')
+        this.setState({
+            fetchData: this.state.fetchData.filter(function (task) {
+                return task.id !== id
+            })
+        });
     }
 
     render() {
@@ -54,18 +53,14 @@ class Home extends Component {
         let card = this.state.fetchData.map((val, key) => {
             return (
                 <React.Fragment>
-                    <Row>
-                        <Col>
-                            <Row>
-                                <Col>{val.title}</Col>
-                                <Col><Button size={"sm"} href={'/tasks/$val.id'}>Update</Button></Col>
-                                <Col><Button variant="danger" size="sm" onClick={() => {
-                                    this.delete(val.id)
-                                }}>Delete</Button></Col>
-                            </Row>
-                        </Col>
-                        <Col></Col>
+                    <Row style={{marginBottom: "10px"}}>
+                        <Col size={10}>{val.title}</Col>
+                        <Col size={1}><Button size="sm" href={'/tasks/' + val.id}>Update</Button></Col>
+                        <Col size={1}><Button variant="danger" size="sm" onClick={() => {
+                            this.delete(val.id)
+                        }}>Delete</Button></Col>
                     </Row>
+                    <hr/>
                 </React.Fragment>
             )
         })
@@ -82,7 +77,7 @@ class Home extends Component {
                     <Button className='my-2' variant="primary" onClick={this.submit}>Submit</Button> <br/><br/>
 
                 </Container>
-                <Container>
+                <Container class="first">
                     <Row>
                         {card}
                     </Row>
