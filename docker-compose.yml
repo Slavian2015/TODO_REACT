@@ -1,17 +1,6 @@
 version: '3.3'
 
 services:
-#  nginx:
-#    depends_on:
-#      - api
-#      - client
-#    restart: always
-#    build:
-#      dockerfile: Dockerfile
-#      context: ./nginx
-#    ports:
-#      - "3050:80"
-
   client:
     stdin_open: true
     environment:
@@ -22,6 +11,8 @@ services:
     volumes:
       - /app/node_modules
       - ./client:/app
+    ports:
+      - 3000:3000
 
   api:
     build:
@@ -38,7 +29,7 @@ services:
     environment:
       - DATABASE_URL=postgresql://react_to_do:react_to_do@mydb:5432/postgres_dev
       - SECRET_KEY=08d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7
-    command: tail -f /dev/null
+    command: uvicorn src.api.application:api --reload --host 0.0.0.0 --port 3232
 
   mydb:
     image: postgres:13

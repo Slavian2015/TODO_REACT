@@ -2,6 +2,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
+import uvicorn
 from starlette.middleware.cors import CORSMiddleware
 
 import src
@@ -28,7 +29,7 @@ perform_mapping()
 api = FastAPI()
 api.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
+    allow_origins=['0.0.0.0', '*', 'localhost'],
     allow_methods=["*"],
     allow_credentials=True,
     allow_headers=["*"],
