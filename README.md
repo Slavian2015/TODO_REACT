@@ -1,12 +1,19 @@
 # TO-DO-LIST 
-# Dockerized React-app with FastAPI, PostgreSQL and Nginx for reverse proxy
+## Dockerized React-app with FastAPI and PostgreSQL
+
+## Installation
 
 
-Run `npm i` inside the client directory
+1) Clone code from the repository to the local machine
 
-Run `npm i` inside the server directory
+```$ git clone git@github.com: path_on_locahost```
 
-Run `docker-compose up --build` inside the main project directory
+2) CD into the project folder
+3) Inside the main project directory run
+
+`docker-compose up -d --build`
 
 
-To start interacting with the application, open `http://localhost:3050/` on a browser.
+
+
+To start interacting with the application, open `http://localhost:3000/` on a browser.
