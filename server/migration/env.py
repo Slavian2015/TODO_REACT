@@ -8,7 +8,7 @@ from alembic import context
 
 from src.mapping import PublicMetadata
 
-load_dotenv(dotenv_path=Path(__file__).absolute() / '.env')
+load_dotenv(dotenv_path=Path(__file__).parent.parent.absolute() / '.env')
 
 config = context.config
 
@@ -59,9 +59,9 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
-    print("\n\nENV URL  -->>", Path(__file__).absolute(), "\n\n")
-    print("\n\nPOSTGRESQL_DSN  -->>", os.getenv('POSTGRESQL_DSN'), "\n\n")
-    connectable = create_engine(os.getenv('POSTGRESQL_DSN'))
+    print("\n\nENV URL  -->>", Path(__file__).parent.parent.absolute(), "\n\n")
+    print("\n\nPOSTGRESQL_DSN  -->>", os.getenv('DATABASE_URL'), "\n\n")
+    connectable = create_engine(os.getenv('DATABASE_URL'))
 
     with connectable.connect() as connection:
         context.configure(
