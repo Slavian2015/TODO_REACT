@@ -3,6 +3,7 @@ version: '3.3'
 services:
   client:
     stdin_open: true
+    restart: always
     environment:
       - CHOKIDAR_USEPOLLING=true
     build:
@@ -22,6 +23,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: "./server"
+    restart: always
     depends_on:
       - mydb
     expose:
@@ -32,13 +34,13 @@ services:
       - ./server:/app
     environment:
       - DATABASE_URL=postgresql://react_to_do:react_to_do@mydb:5432/postgres_dev
-      - SECRET_KEY=08d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7
     command: bash -c "alembic upgrade head && uvicorn src.api.application:api --reload --host 0.0.0.0 --port 3232"
 
   daemon:
     build:
       dockerfile: Dockerfile
       context: "./daemon"
+    restart: always
     depends_on:
       - mydb
       - api
@@ -55,6 +57,7 @@ services:
       - POSTGRES_USER=react_to_do
       - POSTGRES_PASSWORD=react_to_do
       - POSTGRES_DB=postgres_dev
+    restart: always
     volumes:
       - ./services/backend/postgres_data:/var/lib/postgresql/data/
 

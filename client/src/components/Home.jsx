@@ -21,7 +21,12 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://0.0.0.0:3232/todos")
+        axios.get("http://0.0.0.0:3232/todos", {
+            "headers": {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            }
+        })
             .then((response) => {
                 this.setState({
                     fetchData: response.data.tasks
@@ -30,7 +35,12 @@ class Home extends Component {
     }
 
     submit = () => {
-        axios.post('http://0.0.0.0:3232/todos', {title: this.state.setTaskTitle})
+        axios.post('http://0.0.0.0:3232/todos', {title: this.state.setTaskTitle},{
+            "headers": {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            }
+        })
             .then((response) => {
                 this.setState({
                     fetchData: this.state.fetchData.concat([response.data]),
@@ -40,7 +50,12 @@ class Home extends Component {
     }
 
     delete = (id) => {
-        axios.delete(`http://0.0.0.0:3232/todos/${id}`)
+        axios.delete(`http://0.0.0.0:3232/todos/${id}`,{
+            "headers": {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            }
+        })
         this.setState({
             fetchData: this.state.fetchData.filter(function (task) {
                 return task.id !== id
