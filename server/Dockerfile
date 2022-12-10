@@ -15,4 +15,3 @@ COPY src/ ./
 COPY tests/ ./
 COPY alembic.ini .
 COPY setup.cfg .
-RUN alembic upgrade head
