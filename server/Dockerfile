@@ -10,6 +10,9 @@ COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-COPY migration/ .
-COPY src/ .
-COPY tests/ .
+COPY migration/ ./
+COPY src/ ./
+COPY tests/ ./
+COPY alembic.ini .
+COPY setup.cfg .
+RUN #alembic upgrade head
