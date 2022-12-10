@@ -17,7 +17,7 @@ load_dotenv(BASE_PATH / '.env')
 
 container = AppContainer()
 
-container.config.sqlite_dsn.from_env('POSTGRESQL_DSN')
+container.config.sqlite_dsn.from_env('DATABASE_URL')
 
 container.config.base_dir.from_value(BASE_PATH)
 container.config.frontend_base_url.from_env('FRONTEND_BASE_URL', default='')
