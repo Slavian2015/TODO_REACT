@@ -20,12 +20,7 @@ class Task extends Component {
     componentDidMount() {
         console.log("NEW PAGE")
         let {taskSlug} = this.props.params;
-        axios.get("http://0.0.0.0:3232/todos/" + taskSlug, {
-            "headers": {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-            }
-        })
+        axios.get("http://0.0.0.0:3232/todos/" + taskSlug)
             .then((response) => {
                 this.setState({
                     setTaskTitle: response.data.title,
@@ -44,12 +39,7 @@ class Task extends Component {
 
 
     submit = () => {
-        axios.patch('http://0.0.0.0:3232/todos/' + this.state.taskSlug, {title: this.state.setTaskTitle}, {
-            "headers": {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-            }
-        })
+        axios.patch('http://0.0.0.0:3232/todos/' + this.state.taskSlug, {title: this.state.setTaskTitle})
             .then((response) => {window.location.replace('/')})
     }
 

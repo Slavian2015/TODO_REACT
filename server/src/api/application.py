@@ -29,7 +29,7 @@ perform_mapping()
 api = FastAPI()
 api.add_middleware(
     CORSMiddleware,
-    allow_origins=['0.0.0.0', '*', 'localhost'],
+    allow_origins=['0.0.0.0', 'localhost', 'http://localhost:3000', 'http://0.0.0.0:3000'],
     allow_methods=["*"],
     allow_credentials=True,
     allow_headers=["*"],
