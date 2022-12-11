@@ -3,17 +3,14 @@ version: '3.3'
 services:
   client:
     stdin_open: true
+    container_name: client
     restart: always
-    environment:
-      - CHOKIDAR_USEPOLLING=true
     build:
       dockerfile: Dockerfile
       context: ./client
     volumes:
       - /app/node_modules
       - ./client:/app
-    ports:
-      - 3000:3000
     depends_on:
       - mydb
       - api
@@ -24,6 +21,7 @@ services:
       dockerfile: Dockerfile
       context: "./server"
     restart: always
+    container_name: api
     depends_on:
       - mydb
     expose:
@@ -41,6 +39,7 @@ services:
       dockerfile: Dockerfile
       context: "./daemon"
     restart: always
+    container_name: daemon
     depends_on:
       - mydb
       - api
@@ -48,6 +47,17 @@ services:
       - ./daemon:/app
     environment:
       - DATABASE_URL=postgresql://react_to_do:react_to_do@mydb:5432/postgres_dev
+
+  nginx:
+    container_name: slava_nginx
+    build:
+      dockerfile: Dockerfile
+      context: "./nginx"
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
+      - client
 
   mydb:
     image: postgres:13

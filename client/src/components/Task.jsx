@@ -20,7 +20,7 @@ class Task extends Component {
     componentDidMount() {
         console.log("NEW PAGE")
         let {taskSlug} = this.props.params;
-        axios.get("http://0.0.0.0:3232/todos/" + taskSlug)
+        axios.get("http://localhost:3000/api/todos/" + taskSlug)
             .then((response) => {
                 this.setState({
                     setTaskTitle: response.data.title,
@@ -39,7 +39,7 @@ class Task extends Component {
 
 
     submit = () => {
-        axios.patch('http://0.0.0.0:3232/todos/' + this.state.taskSlug, {title: this.state.setTaskTitle})
+        axios.patch('http://localhost:3000/api/todos/' + this.state.taskSlug, {title: this.state.setTaskTitle})
             .then((response) => {window.location.replace('/')})
     }
 
@@ -75,40 +75,3 @@ class Task extends Component {
 }
 
 export default withParams(Task);
-
-
-// function
-//
-// Task() {
-//     let {taskSlug} = useParams();
-//
-//     useEffect(() => {
-//     }, [taskSlug]);
-//
-//     return (
-//         <div className="home">
-//             <div class="container">
-//                 <h1 className="mt-5">This is a Task Title</h1>
-//                 <h6 className="mb-5">The post slug is, {taskSlug}</h6>
-//                 <p>
-//                     Lorem Ipsum is simply dummy text of the printing and typesetting
-//                     industry. Lorem Ipsum has been the industry's standard dummy text ever
-//                     since the 1500s, when an unknown printer took a galley of type and
-//                     scrambled it to make a type specimen book.
-//                 </p>
-//                 <p>
-//                     Lorem Ipsum is simply dummy text of the printing and typesetting
-//                     industry. Lorem Ipsum has been the industry's standard dummy text ever
-//                     since the 1500s, when an unknown printer took a galley of type and
-//                     scrambled it to make a type specimen book.
-//                 </p>
-//                 <p>
-//                     Lorem Ipsum is simply dummy text of the printing and typesetting
-//                     industry. Lorem Ipsum has been the industry's standard dummy text ever
-//                     since the 1500s, when an unknown printer took a galley of type and
-//                     scrambled it to make a type specimen book.
-//                 </p>
-//             </div>
-//         </div>
-//     );
-// }
