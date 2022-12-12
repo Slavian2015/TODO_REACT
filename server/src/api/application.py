@@ -2,7 +2,6 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
-import uvicorn
 from starlette.middleware.cors import CORSMiddleware
 
 import src

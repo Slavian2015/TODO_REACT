@@ -21,7 +21,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:3000/api/todos",)
+        axios.get("/api/todos",)
             .then((response) => {
                 this.setState({
                     fetchData: response.data.tasks
@@ -30,7 +30,7 @@ class Home extends Component {
     }
 
     submit = () => {
-        axios.post('http://localhost:3000/api/todos', {title: this.state.setTaskTitle})
+        axios.post('/api/todos', {title: this.state.setTaskTitle})
             .then((response) => {
                 this.setState({
                     fetchData: this.state.fetchData.concat([response.data]),
@@ -40,7 +40,7 @@ class Home extends Component {
     }
 
     delete = (id) => {
-        axios.delete(`http://localhost:3000/api/todos/${id}`)
+        axios.delete(`/api/todos/${id}`)
         this.setState({
             fetchData: this.state.fetchData.filter(function (task) {
                 return task.id !== id

@@ -18,9 +18,8 @@ class Task extends Component {
     }
 
     componentDidMount() {
-        console.log("NEW PAGE")
         let {taskSlug} = this.props.params;
-        axios.get("http://localhost:3000/api/todos/" + taskSlug)
+        axios.get("/api/todos/" + taskSlug)
             .then((response) => {
                 this.setState({
                     setTaskTitle: response.data.title,
@@ -39,7 +38,7 @@ class Task extends Component {
 
 
     submit = () => {
-        axios.patch('http://localhost:3000/api/todos/' + this.state.taskSlug, {title: this.state.setTaskTitle})
+        axios.patch('/api/todos/' + this.state.taskSlug, {title: this.state.setTaskTitle})
             .then((response) => {window.location.replace('/')})
     }
 
@@ -63,10 +62,7 @@ class Task extends Component {
                             </Row>
                         </Col>
                         <Col></Col>
-
-
                     </Row>
-
                     <br/><br/>
                 </Container>
             </div>
